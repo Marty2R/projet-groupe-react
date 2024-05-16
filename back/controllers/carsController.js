@@ -30,3 +30,19 @@ export const getCars = async (req, res) => {
 
   return res.json(existingUser);
 };
+
+export const deleteCar = async (req, res) => {
+  const { id } = req.params;
+
+  const car = await carModel.findById({ _id: id });
+
+  console.log(car);
+
+  if (!car) {
+    return res.json({ success: false });
+  }
+
+  await carModel.deleteOne({ _id: id });
+
+  return res.json({ success: true });
+};

@@ -1,6 +1,10 @@
 import express from "express";
 import { body } from "express-validator";
-import { getCars, createCar } from "../controllers/carsController.js";
+import {
+  getCars,
+  createCar,
+  deleteCar,
+} from "../controllers/carsController.js";
 
 const router = express.Router();
 
@@ -14,5 +18,7 @@ router.post(
 );
 
 router.get("/", getCars);
+
+router.delete("/:id", deleteCar);
 
 export default router;

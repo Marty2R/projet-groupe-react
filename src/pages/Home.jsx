@@ -61,11 +61,11 @@ export default function Home() {
 
   const [rowSelection, setRowSelection] = useState({});
 
-  //   const removeBook = async (id) => {
-  //     await BooksService.removeBook(id);
-  //     const books = await BooksService.getAllBooks();
-  //     setBooks(books);
-  //   };
+  const deleteCar = async (id) => {
+    await carsService.deleteCar(id);
+    const cars = await carsService.getCars();
+    setCars(cars);
+  };
 
   const columns = [
     {
@@ -190,9 +190,11 @@ export default function Home() {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuItem>Remove Parts</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => deleteCar(row.original._id)}>
+                Remove Parts
+              </DropdownMenuItem>
               <DropdownMenuItem>
-                <Link to={`/update/parts/${row.original.id}`}>
+                <Link to={`/update/parts/${row.original._id}`}>
                   Update Parts
                 </Link>
               </DropdownMenuItem>
