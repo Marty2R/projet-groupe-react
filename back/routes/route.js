@@ -6,7 +6,7 @@ import {
   createCar,
 //   deleteCar,
 //   editCar,
-} from "../controllers/clothesController.js";
+} from "../controllers/carsController.js";
 
 const router = express.Router();
 
