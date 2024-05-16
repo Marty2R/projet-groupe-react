@@ -9,7 +9,8 @@ const FormInput = ({ content, label, register, errors, validation, type }) => {
       <div>
         {content && (
           <Label htmlFor={label}>
-            {content} {validation && <span className="text-red-600">*</span>}
+            {content}{" "}
+            {validation.required && <span className="text-red-600">*</span>}
           </Label>
         )}
 
