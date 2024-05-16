@@ -1,14 +1,14 @@
 import carModel from "../models/car.model.js";
 
 export const createCar = (request, response) => {
-  const bodyContent = request.body;
-  const car = carModel.findOneById({ id: idcar });
+    const bodyContent = request.body;
+    const car =  carModel.findOneById({id: idcar})
 
-  if (!car) {
-    return response.json({ success: false });
-  }
-  // const errors = validationResult(request);
-  // console.log(errors);
+    if (!car) {
+        return response.json({success: false})
+    }
+    // const errors = validationResult(request);
+    // console.log(errors);
 
   const newCar = new carModel(bodyContent);
 
@@ -24,6 +24,7 @@ export const createCar = (request, response) => {
 };
 
 export const getCars = async (req, res) => {
+  console.log("get cars");
   const existingUser = await carModel.find();
 
   console.log(existingUser);

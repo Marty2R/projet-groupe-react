@@ -86,7 +86,6 @@ const Edite = () => {
             errors={errors}
           />
           <Button className="m-[auto] mt-[20px]">Save</Button>
-          <Button>Back to stock</Button>
         </form>
         <Toaster />
       </main>
