@@ -41,12 +41,13 @@ import {
 
 // Services
 
-// import BooksService from "@/services/books.service.js";
-// import CategoriesService from "@/services/categories.service.js";
+import partsService from "@/services/parts.service.js";
+import categoriesService from "@/services/categories.service.js";
+
 import { Link } from "react-router-dom";
 
 export default function Home() {
-  const [books, setBooks] = useState([]);
+  const [parts, setParts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
@@ -132,10 +133,10 @@ export default function Home() {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuItem>Remove Book</DropdownMenuItem>
+              <DropdownMenuItem>Remove Parts</DropdownMenuItem>
               <DropdownMenuItem>
-                <Link to={`/update/book/${row.original._id}`}>
-                  Update Books
+                <Link to={`/update/parts/${row.original._id}`}>
+                  Update Parts
                 </Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -146,7 +147,7 @@ export default function Home() {
   ];
 
   const table = useReactTable({
-    data: books,
+    data: parts,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -164,14 +165,15 @@ export default function Home() {
     },
   });
 
-  //   useEffect(() => {
-  //     (async () => {
-  //       const books = await BooksService.getAllBooks();
-  //       const categories = await CategoriesService.getAllCategories();
-  //       setBooks(books);
-  //       setCategories(categories);
-  //     })();
-  //   }, []);
+  useEffect(() => {
+    (async () => {
+      const parts = await partsService.getAllParts();
+      const categories = await categoriesService.getAllCategories();
+      setParts(parts.data);
+      console.log(parts.data);
+      setCategories(categories.data);
+    })();
+  }, []);
 
   return (
     <div className="w-full px-10 py-5">
@@ -202,7 +204,7 @@ export default function Home() {
           </Select>
           <div className="flex items-center pb-4">
             <Input
-              placeholder="Filter books..."
+              placeholder="Filter title..."
               value={table.getColumn("label")?.getFilterValue() ?? ""}
               onChange={(event) =>
                 table.getColumn("label")?.setFilterValue(event.target.value)
