@@ -1,12 +1,6 @@
-import express, { response } from "express";
+import express from "express";
 import { body } from "express-validator";
-
-import {
-//   getCars,
-  createCar,
-//   deleteCar,
-//   editCar,
-} from "../controllers/carsController.js";
+import { getCars, createCar } from "../controllers/carsController.js";
 
 const router = express.Router();
 
@@ -19,5 +13,6 @@ router.get(
   createCar
 );
 
+router.get("/", getCars);
 
 export default router;

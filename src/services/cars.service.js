@@ -1,3 +1,7 @@
+import { fetchApi } from "../utils/fetchApi";
+
+const UR_API_GET_CARS = "http://localhost:8000/cars";
+
 function getAllCars() {
   const object = {
     data: [
@@ -132,12 +136,73 @@ function getAllCars() {
         color: "blue",
         price: 115000,
       },
+
+      // Mercedes
+
+      {
+        id: 16,
+        model: "A-Class",
+        brand: "Mercedes",
+        year: "2021",
+        color: "red",
+        price: 120000,
+      },
+      {
+        id: 17,
+        model: "C-Class",
+        brand: "Mercedes",
+        year: "2021",
+        color: "yellow",
+        price: 125000,
+      },
+      {
+        id: 18,
+        model: "E-Class",
+        brand: "Mercedes",
+        year: "2021",
+        color: "green",
+        price: 130000,
+      },
+
+      // Mazda
+
+      {
+        id: 19,
+        model: "3",
+        brand: "Mazda",
+        year: "2021",
+        color: "black",
+        price: 135000,
+      },
+      {
+        id: 20,
+        model: "6",
+        brand: "Mazda",
+        year: "2021",
+        color: "white",
+        price: 140000,
+      },
+      {
+        id: 21,
+        model: "CX-5",
+        brand: "Mazda",
+        year: "2021",
+        color: "blue",
+        price: 145000,
+      },
     ],
   };
 
   return object;
 }
 
+export const updatePart = async () => {
+  return fetchApi(`${UR_API_GET_CARS}`, "GET", {
+    "Content-Type": "application/json",
+  });
+};
+
 export default {
   getAllCars,
+  updatePart,
 };
