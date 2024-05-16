@@ -4,7 +4,7 @@ import { getCars, createCar } from "../controllers/carsController.js";
 
 const router = express.Router();
 
-router.get(
+router.post(
   "/add",
   [
     body("brand").trim().isLength({ min: 200, max: 1 }),

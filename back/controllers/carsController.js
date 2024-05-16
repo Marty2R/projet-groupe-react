@@ -1,6 +1,4 @@
-import { validationResult } from "express-validator";
 import carModel from "../models/car.model.js";
-import e from "express";
 
 export const createCar = (request, response) => {
   const bodyContent = request.body;
@@ -26,6 +24,7 @@ export const createCar = (request, response) => {
 };
 
 export const getCars = async (req, res) => {
+  console.log("get cars");
   const existingUser = await carModel.find();
 
   console.log(existingUser);

@@ -9,4 +9,4 @@ const carSchema = new Schema({
   color: String
 });
 
-export default model("Car", carSchema);
+export default model("vehicule", carSchema);
