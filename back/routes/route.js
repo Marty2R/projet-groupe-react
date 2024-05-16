@@ -10,7 +10,7 @@ import {
 
 const router = express.Router();
 
-router.get(
+router.post(
   "/add",
   [
     body("brand").trim().isLength({ min: 200, max: 1 }),

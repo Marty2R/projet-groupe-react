@@ -3,7 +3,7 @@ import carModel from "../models/car.model.js";
 
 export const createCar = (request, response) => {
     const bodyContent = request.body;
-  const car =  carModel.findOneById({id: idcar})
+    const car =  carModel.findOneById({id: idcar})
 
     if (!car) {
         return response.json({success: false})
@@ -12,7 +12,7 @@ export const createCar = (request, response) => {
     // console.log(errors);
 
     const newCar = new carModel(bodyContent);
-  
+    console.log(bodyContent);
     newCar
       .save()
       .then((result) => {
