@@ -195,9 +195,7 @@ export default function Home() {
                 Remove Parts
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <Link to={`/update/parts/${row.original._id}`}>
-                  Update Parts
-                </Link>
+                <Link to={`/update/${row.original._id}`}>Update Parts</Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

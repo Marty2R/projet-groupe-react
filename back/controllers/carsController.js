@@ -22,8 +22,8 @@ export const createCar = (request, response) => {
 };
 
 export const getCars = async (req, res) => {
+  console.log("get cars");
   const existingUser = await carModel.find();
-
   return res.json(existingUser);
 };
 
@@ -42,5 +42,3 @@ export const deleteCar = async (req, res) => {
 
   return res.json({ success: true });
 };
-
-JSON.stringify;

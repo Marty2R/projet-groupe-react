@@ -37,7 +37,8 @@ const Add = () => {
       <main>
         <form
           onSubmit={handleSubmit(onSubmit, fetchError)}
-          className="w-[500px] m-auto mt-[50px]">
+          className="w-[500px] m-auto mt-[50px]"
+        >
           <h1>Ajout d'un véhicule</h1>
           <InputText
             content="Brand"
@@ -85,7 +86,6 @@ const Add = () => {
             errors={errors}
           />
           <Button className="m-[auto] mt-[20px]">Save</Button>
-          <Button>Back to stock</Button>
         </form>
         <Toaster />
       </main>
