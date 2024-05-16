@@ -41,14 +41,20 @@ import {
 
 // Services
 
-import partsService from "@/services/parts.service.js";
-import categoriesService from "@/services/categories.service.js";
+import brandsService from "@/services/brands.service.js";
+import carsService from "@/services/cars.service.js";
+import modelService from "@/services/model.service";
+import colorService from "@/services/color.service";
+import yearService from "@/services/year.service";
 
 import { Link } from "react-router-dom";
 
 export default function Home() {
-  const [parts, setParts] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [brands, setBrands] = useState([]);
+  const [models, setModels] = useState([]);
+  const [cars, setCars] = useState([]);
+  const [color, setColor] = useState([]);
+  const [year, setYear] = useState([]);
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
@@ -85,37 +91,88 @@ export default function Home() {
       enableHiding: false,
     },
     {
-      accessorKey: "categories",
+      accessorKey: "brand",
       header: ({ column }) => {
         return (
           <Button
             variant="ghost"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Categories
+            Brands
             <ArrowUpDown className="ml-2 h-4 w-4" />
           </Button>
         );
       },
       cell: ({ row }) => (
-        <div className="capitalize">{row.getValue("categories")}</div>
+        <div className="capitalize">{row.getValue("brand")}</div>
       ),
     },
     {
-      accessorKey: "label",
+      accessorKey: "model",
       header: ({ column }) => {
         return (
           <Button
             variant="ghost"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Title
+            Model
             <ArrowUpDown className="ml-2 h-4 w-4" />
           </Button>
         );
       },
       cell: ({ row }) => (
-        <div className="capitalize">{row.getValue("label")}</div>
+        <div className="capitalize">{row.getValue("model")}</div>
+      ),
+    },
+    {
+      accessorKey: "color",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Color
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        );
+      },
+      cell: ({ row }) => (
+        <div className="capitalize">{row.getValue("color")}</div>
+      ),
+    },
+    {
+      accessorKey: "price",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Price
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        );
+      },
+      cell: ({ row }) => (
+        <div className="capitalize">{row.getValue("price")}</div>
+      ),
+    },
+    {
+      accessorKey: "year",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Year
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        );
+      },
+      cell: ({ row }) => (
+        <div className="capitalize">{row.getValue("year")}</div>
       ),
     },
     {
@@ -135,7 +192,7 @@ export default function Home() {
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuItem>Remove Parts</DropdownMenuItem>
               <DropdownMenuItem>
-                <Link to={`/update/parts/${row.original._id}`}>
+                <Link to={`/update/parts/${row.original.id}`}>
                   Update Parts
                 </Link>
               </DropdownMenuItem>
@@ -147,7 +204,7 @@ export default function Home() {
   ];
 
   const table = useReactTable({
-    data: parts,
+    data: cars,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -167,11 +224,16 @@ export default function Home() {
 
   useEffect(() => {
     (async () => {
-      const parts = await partsService.getAllParts();
-      const categories = await categoriesService.getAllCategories();
-      setParts(parts.data);
-      console.log(parts.data);
-      setCategories(categories.data);
+      const brands = await brandsService.getAllBrands();
+      const models = await modelService.getAllModels();
+      const cars = await carsService.getAllCars();
+      const color = await colorService.getAllColors();
+      const year = await yearService.getAllYears();
+      setCars(cars.data);
+      setYear(year.data);
+      setColor(color.data);
+      setModels(models.data);
+      setBrands(brands.data);
     })();
   }, []);
 
@@ -180,37 +242,95 @@ export default function Home() {
       <div className="grid grid-cols-1">
         {/* <Navigation /> */}
         <div>
-          <Select
-            onValueChange={(event) =>
-              table
-                .getColumn("categories")
-                ?.setFilterValue(event === "none" ? "" : event)
-            }
-          >
-            <SelectTrigger className="w-[300px] mb-4">
-              <SelectValue placeholder="Select a categorie" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Filter categories...</SelectLabel>
-                <SelectItem value="none">All</SelectItem>
-                {categories.map((category) => (
-                  <SelectItem key={category.label} value={category.label}>
-                    {category.label}
-                  </SelectItem>
-                ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-          <div className="flex items-center pb-4">
-            <Input
-              placeholder="Filter title..."
-              value={table.getColumn("label")?.getFilterValue() ?? ""}
-              onChange={(event) =>
-                table.getColumn("label")?.setFilterValue(event.target.value)
-              }
-              className="max-w-sm"
-            />
+          <div className="grid grid-cols-4 gap-5">
+            <Select
+              onValueChange={(event) => {
+                table
+                  .getColumn("brand")
+                  ?.setFilterValue(event === "none" ? "" : event);
+              }}
+            >
+              <SelectTrigger className="mb-4">
+                <SelectValue placeholder="Select a brand" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Filter brand...</SelectLabel>
+                  <SelectItem value="none">All</SelectItem>
+                  {brands.map((brand) => (
+                    <SelectItem key={brand} value={brand}>
+                      {brand}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+            <Select
+              onValueChange={(event) => {
+                table
+                  .getColumn("model")
+                  ?.setFilterValue(event === "none" ? "" : event);
+              }}
+            >
+              <SelectTrigger className="mb-4">
+                <SelectValue placeholder="Select a model" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Filter model...</SelectLabel>
+                  <SelectItem value="none">All</SelectItem>
+                  {models.map((model) => (
+                    <SelectItem key={model} value={model}>
+                      {model}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+            <Select
+              onValueChange={(event) => {
+                table
+                  .getColumn("color")
+                  ?.setFilterValue(event === "none" ? "" : event);
+              }}
+            >
+              <SelectTrigger className="mb-4">
+                <SelectValue placeholder="Select a color" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Filter color...</SelectLabel>
+                  <SelectItem value="none">All</SelectItem>
+                  {color.map((color) => (
+                    <SelectItem key={color} value={color}>
+                      {color}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+            <Select
+              onValueChange={(event) => {
+                table
+                  .getColumn("year")
+                  ?.setFilterValue(event === "none" ? "" : event);
+              }}
+            >
+              <SelectTrigger className="mb-4">
+                <SelectValue placeholder="Select a year" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Filter year...</SelectLabel>
+                  <SelectItem value="none">All</SelectItem>
+                  {year.map((year) => (
+                    <SelectItem key={year} value={year}>
+                      {year.toString()}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
           </div>
           <div>
             <div className="rounded-md border">

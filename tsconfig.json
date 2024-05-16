@@ -27,6 +27,6 @@
       ]
     }
   },
-  "include": ["src", "src/services/categories.service.js"],
+  "include": ["src", "src/services/brands.js"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
