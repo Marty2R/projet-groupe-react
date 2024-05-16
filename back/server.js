@@ -13,6 +13,8 @@ app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
 app.use(bodyParser.json());
 
+app.use(express.json());
+
 // database connection
 import "./config/database.js";
 

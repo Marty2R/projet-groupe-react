@@ -6,7 +6,7 @@ const carSchema = new Schema({
   model: String,
   price: Number,
   year: String,
-  color: String
+  color: String,
 });
 
-export default model("vehicule", carSchema);
+export default model("cars", carSchema);

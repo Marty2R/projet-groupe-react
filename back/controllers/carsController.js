@@ -24,7 +24,6 @@ export const createCar = (request, response) => {
 };
 
 export const getCars = async (req, res) => {
-  console.log("get cars");
   const existingUser = await carModel.find();
 
   console.log(existingUser);
