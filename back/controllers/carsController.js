@@ -42,3 +42,48 @@ export const deleteCar = async (req, res) => {
 
   return res.json({ success: true });
 };
+
+export const getCarById = async (req, res) => {
+  const { id } = req.params;
+
+  const car = await carModel.findById({ _id: id });
+
+  if (!car) {
+    return res.json({ success: false });
+  }
+
+  return res.json(car);
+};
+
+export const updateCar = async (req, res) => {
+  const { id } = req.params;
+  const bodyContent = req.body;
+
+  console.log(bodyContent);
+
+  const car = await carModel.findById({ _id: id });
+
+  if (!car) {
+    return res.json({ success: false });
+  }
+
+  console.log(bodyContent);
+
+  const updatedCar = await carModel.findOneAndUpdate(
+    {
+      _id: id,
+    },
+    {
+      ...bodyContent,
+    },
+    {
+      new: true,
+    }
+  );
+
+  if (!updatedCar) {
+    return res.json({ success: false });
+  }
+
+  return res.json({ success: true, car: updatedCar });
+};

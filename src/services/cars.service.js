@@ -28,9 +28,14 @@ export const getCarById = async (id) => {
 };
 
 export const updateCar = async (id, data) => {
-  return fetchApi(`${UR_API_UPDATE_CARS}/${id}`, "PUT", {
-    "Content-Type": "application/json",
-  });
+  return fetchApi(
+    `${UR_API_UPDATE_CARS}/${id}`,
+    "PUT",
+    {
+      "Content-Type": "application/json",
+    },
+    JSON.stringify(data)
+  );
 };
 
 export default {

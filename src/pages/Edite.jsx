@@ -1,17 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // Custom components
 import InputText from "@/components/parts/form/InputText";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { useToast } from "@/components/ui/use-toast";
 import { Toaster } from "@/components/ui/toaster";
-<<<<<<< HEAD
 import Header from "../components/Header";
-=======
+
 import cars from "@/services/cars.service";
-import { useEffect } from "react";
-import { useState } from "react";
->>>>>>> 8eb6574334527bc4715a83b812a8973fd99ec4e5
 
 const Edite = () => {
   const { toast } = useToast();
@@ -24,9 +20,12 @@ const Edite = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
-    //await cars.updateCar();
+  const onSubmit = async (data) => {
+    const id =
+      window.location.href.split("/")[
+        window.location.href.split("/").length - 1
+      ];
+    await cars.updateCar(id, data);
     toast({
       title: "Succesful",
       description: "Datas as edited succesfuly.",
@@ -47,12 +46,11 @@ const Edite = () => {
         window.location.href.split("/").length - 1
       ];
     const data = await cars.getCarById(id);
-    setValue("Brand", data.brand);
-    setValue("Model", data.model);
-    setValue("Color", data.color);
-    setValue("Price", data.price);
-    setValue("Year", data.year);
-    setValue("Year", data.year);
+    setValue("brand", data.brand);
+    setValue("model", data.model);
+    setValue("color", data.color);
+    setValue("price", data.price);
+    setValue("year", data.year);
   };
 
   useEffect(() => {
@@ -70,7 +68,7 @@ const Edite = () => {
           <h1>Edite</h1>
           <InputText
             content="Brand"
-            label="Brand"
+            label="brand"
             type="text"
             required
             register={register}
@@ -79,7 +77,7 @@ const Edite = () => {
           />
           <InputText
             content="Model"
-            label="Model"
+            label="model"
             type="text"
             required
             register={register}
@@ -88,7 +86,7 @@ const Edite = () => {
           />
           <InputText
             content="Price"
-            label="Price"
+            label="price"
             type="number"
             required
             register={register}
@@ -97,7 +95,7 @@ const Edite = () => {
           />
           <InputText
             content="Year"
-            label="Year"
+            label="year"
             type="number"
             required
             register={register}
@@ -106,7 +104,7 @@ const Edite = () => {
           />
           <InputText
             content="Color"
-            label="Color"
+            label="color"
             type="text"
             required
             register={register}

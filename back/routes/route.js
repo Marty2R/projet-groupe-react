@@ -5,6 +5,7 @@ import {
   createCar,
   deleteCar,
   getCarById,
+  updateCar,
 } from "../controllers/carsController.js";
 
 const router = express.Router();
@@ -23,5 +24,7 @@ router.get("/:id", getCarById);
 router.get("/", getCars);
 
 router.delete("/:id", deleteCar);
+
+router.put("/:id", updateCar);
 
 export default router;
