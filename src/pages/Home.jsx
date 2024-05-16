@@ -48,6 +48,7 @@ import colorService from "@/services/color.service";
 import yearService from "@/services/year.service";
 
 import { Link } from "react-router-dom";
+import Header from "../components/Header";
 
 export default function Home() {
   const [brands, setBrands] = useState([]);
@@ -242,6 +243,7 @@ export default function Home() {
 
   return (
     <div className="w-full px-10 py-5">
+      <Header />
       <div className="grid grid-cols-1">
         {/* <Navigation /> */}
         <div>

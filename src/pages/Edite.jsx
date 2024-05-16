@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { useToast } from "@/components/ui/use-toast";
 import { Toaster } from "@/components/ui/toaster";
+import Header from "../components/Header";
 
 const Edite = () => {
   const { toast } = useToast();
@@ -35,6 +36,7 @@ const Edite = () => {
   return (
     <>
       <main>
+        <Header />
         <form
           onSubmit={handleSubmit(onSubmit, fetchError)}
           className="w-[500px] m-auto mt-[50px]"

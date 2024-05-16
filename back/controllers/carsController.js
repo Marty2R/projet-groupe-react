@@ -7,8 +7,6 @@ export const createCar = (request, response) => {
   if (!car) {
     return response.json({ success: false });
   }
-  // const errors = validationResult(request);
-  // console.log(errors);
 
   const newCar = new carModel(bodyContent);
 
@@ -25,8 +23,6 @@ export const createCar = (request, response) => {
 
 export const getCars = async (req, res) => {
   const existingUser = await carModel.find();
-
-  console.log(existingUser);
 
   return res.json(existingUser);
 };
@@ -46,3 +42,5 @@ export const deleteCar = async (req, res) => {
 
   return res.json({ success: true });
 };
+
+JSON.stringify;
