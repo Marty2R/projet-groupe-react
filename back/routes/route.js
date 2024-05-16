@@ -4,6 +4,7 @@ import {
   getCars,
   createCar,
   deleteCar,
+  getCarById,
 } from "../controllers/carsController.js";
 
 const router = express.Router();
@@ -16,6 +17,8 @@ router.post(
   ],
   createCar
 );
+
+router.get("/:id", getCarById);
 
 router.get("/", getCars);
 
