@@ -226,10 +226,11 @@ export default function Home() {
     (async () => {
       const brands = await brandsService.getAllBrands();
       const models = await modelService.getAllModels();
-      const cars = await carsService.getAllCars();
+      const cars = await carsService.getCars();
       const color = await colorService.getAllColors();
       const year = await yearService.getAllYears();
-      setCars(cars.data);
+      console.log(cars);
+      setCars(cars);
       setYear(year.data);
       setColor(color.data);
       setModels(models.data);
