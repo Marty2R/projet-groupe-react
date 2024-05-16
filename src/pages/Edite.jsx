@@ -11,7 +11,6 @@ import cars from "@/services/cars.service";
 
 const Edite = () => {
   const { toast } = useToast();
-  const [data, setData] = useState({});
 
   const {
     register,

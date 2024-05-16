@@ -6,6 +6,9 @@ import { useForm } from "react-hook-form";
 import { useToast } from "@/components/ui/use-toast";
 import { Toaster } from "@/components/ui/toaster";
 
+import carService from "@/services/cars.service";
+import Header from "../components/Header";
+
 const Add = () => {
   const { toast } = useToast();
 
@@ -15,7 +18,8 @@ const Add = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    await carService.addCar(data);
     console.log(data);
     toast({
       title: "Succesful",
@@ -35,6 +39,7 @@ const Add = () => {
   return (
     <>
       <main>
+        <Header />
         <form
           onSubmit={handleSubmit(onSubmit, fetchError)}
           className="w-[500px] m-auto mt-[50px]"
@@ -42,7 +47,7 @@ const Add = () => {
           <h1>Ajout d'un véhicule</h1>
           <InputText
             content="Brand"
-            label="Brand"
+            label="brand"
             type="text"
             required
             register={register}
@@ -51,7 +56,7 @@ const Add = () => {
           />
           <InputText
             content="Model"
-            label="Model"
+            label="model"
             type="text"
             required
             register={register}
@@ -60,7 +65,7 @@ const Add = () => {
           />
           <InputText
             content="Price"
-            label="Price"
+            label="price"
             type="number"
             required
             register={register}
@@ -69,7 +74,7 @@ const Add = () => {
           />
           <InputText
             content="Year"
-            label="Year"
+            label="year"
             type="number"
             required
             register={register}
@@ -78,7 +83,7 @@ const Add = () => {
           />
           <InputText
             content="Color"
-            label="Color"
+            label="color"
             type="text"
             required
             register={register}

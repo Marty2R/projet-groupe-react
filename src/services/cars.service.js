@@ -4,6 +4,7 @@ const UR_API_GET_CARS = "http://localhost:8000/cars";
 const UR_API_DELETE_CARS = "http://localhost:8000/cars";
 const UR_API_UPDATE_CARS = "http://localhost:8000/cars";
 const UR_API_GET_BY_ID_CARS = "http://localhost:8000/cars";
+const URL_API_ADD_CAR = "http://localhost:8000/cars";
 
 // Get all cars from the database
 
@@ -38,7 +39,19 @@ export const updateCar = async (id, data) => {
   );
 };
 
+export const addCar = async (data) => {
+  return fetchApi(
+    `${URL_API_ADD_CAR}`,
+    "POST",
+    {
+      "Content-Type": "application/json",
+    },
+    JSON.stringify(data)
+  );
+};
+
 export default {
+  addCar,
   getCars,
   getCarById,
   deleteCar,

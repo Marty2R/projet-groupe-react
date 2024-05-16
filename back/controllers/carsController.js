@@ -1,24 +1,15 @@
 import carModel from "../models/car.model.js";
 
-export const createCar = (request, response) => {
-  const bodyContent = request.body;
-  const car = carModel.findOneById({ id: idcar });
+export const createCar = (req, res) => {
+  const bodyContent = req.body;
 
-  if (!car) {
-    return response.json({ success: false });
-  }
+  const newCar = new carModel({
+    ...bodyContent,
+  });
 
-  const newCar = new carModel(bodyContent);
+  newCar.save();
 
-  newCar
-    .save()
-    .then((result) => {
-      response.status(201).json(result);
-    })
-    .catch((error) => {
-      console.log(error);
-      throw new Error(error);
-    });
+  return res.json({ success: true });
 };
 
 export const getCars = async (req, res) => {
