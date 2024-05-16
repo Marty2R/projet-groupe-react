@@ -1,10 +1,10 @@
 import fetchApi from "./index.js";
 
-const UR_API_GET_CARS = "http://localhost:8000/cars";
-const UR_API_DELETE_CARS = "http://localhost:8000/cars";
-const UR_API_UPDATE_CARS = "http://localhost:8000/cars";
-const UR_API_GET_BY_ID_CARS = "http://localhost:8000/cars";
-const URL_API_ADD_CAR = "http://localhost:8000/cars";
+const UR_API_GET_CARS = "https://group-isitech-back.vercel.app/cars";
+const UR_API_DELETE_CARS = "https://group-isitech-back.vercel.app/cars";
+const UR_API_UPDATE_CARS = "https://group-isitech-back.vercel.app/cars";
+const UR_API_GET_BY_ID_CARS = "https://group-isitech-back.vercel.app/cars";
+const URL_API_ADD_CAR = "https://group-isitech-back.vercel.app/cars";
 
 // Get all cars from the database
 
